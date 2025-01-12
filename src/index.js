@@ -25,6 +25,17 @@ app.post("/asset", (req, res) => {
         });
 });
 
+app.get("/asset", (req, res) => {
+    const fileName = req.query.fileName;
+    const localFileName = path.join(__dirname, "../uploads", fileName);
+    res.writeHead(200, {
+        "Content-Type": "image/png",
+    });
+
+    const fileReadStream = fs.createReadStream(localFileName);
+    fileReadStream.pipe(res);
+});
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
