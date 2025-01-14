@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const { MongoClient, ObjectId } = require("mongodb");
+const cors = require("cors");
 
 const PORT = process.env.PORT;
 if (!PORT) {
@@ -23,6 +24,8 @@ async function main() {
     const assetCollections = db.collection("assets");
 
     const app = express();
+    app.use(cors());
+    
     app.post("/asset", async (req, res) => {
         const assetId = new ObjectId();
         const fileName = req.headers["file-name"];
