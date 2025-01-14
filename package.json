@@ -4,7 +4,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "start:dev": "cross-env PORT=3000 nodemon src/index.js"
+    "start:dev": "concurrently \"npm run start-db\" \"npm run start-with-dev-db\"",
+    "start-db": "insta-mongo --db-port=7001 --rest-port=7002",
+    "start-with-dev-db": "cross-env PORT=3000 DB_CONNECTION_STRING=mongodb://localhost:7001 nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +14,9 @@
   "type": "commonjs",
   "description": "",
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
+    "insta-mongo": "^0.0.8",
     "nodemon": "^3.1.9"
   },
   "dependencies": {
