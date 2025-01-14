@@ -65,6 +65,14 @@ async function main() {
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}`);
     });
+
+    app.get("/assets", async (req, res) => {
+        const assets = await assetCollections.find().toArray();
+
+        res.json({
+            asset: assets,
+        });
+    });
 }
 
 main()
