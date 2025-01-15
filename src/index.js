@@ -73,7 +73,7 @@ async function main() {
         const assets = await assetCollections.find().toArray();
 
         res.json({
-            asset: assets,
+            assets: assets,
         });
     });
 }
